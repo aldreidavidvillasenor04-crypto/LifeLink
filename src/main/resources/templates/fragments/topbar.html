@@ -1,0 +1,15 @@
+<header class="topbar" th:fragment="topbar">
+    <a class="topbar-brand" th:href="${adminView} ? @{/admin/dashboard} : @{/donor/dashboard}">
+        <span class="brand-mark" aria-hidden="true">♥</span>
+        <span><strong>LifeLink</strong><small>Blood donation management</small></span>
+    </a>
+    <div class="topbar-context">
+        <span>Workspace</span><b aria-hidden="true">/</b>
+        <strong th:text="${moduleTitle}">Dashboard</strong>
+    </div>
+    <a class="account-link" th:href="${adminView} ? @{/admin/profile} : @{/donor/profile}">
+        <span class="account-avatar" aria-hidden="true">♟</span>
+        <span><small>Signed in as</small><strong th:text="${username}">User</strong></span>
+        <span class="account-chevron" aria-hidden="true">⌄</span>
+    </a>
+</header>

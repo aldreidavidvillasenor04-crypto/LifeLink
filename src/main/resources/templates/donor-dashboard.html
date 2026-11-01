@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Donor Dashboard | LifeLink</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css(v=2)}">
+    <script th:src="@{/js/dashboard.js(v=2)}" defer></script>
+</head>
+<body class="dashboard-page">
+<div class="app-shell">
+    <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <main class="dashboard-main">
+        <div th:replace="~{fragments/topbar :: topbar}"></div>
+        <section class="welcome-banner">
+            <div class="welcome-art" aria-hidden="true">🩸</div>
+            <div class="welcome-copy">
+                <p class="eyebrow">DONOR DASHBOARD</p>
+                <h1>Welcome, <span th:text="${username}">Donor</span>! <span aria-hidden="true">👋</span></h1>
+                <p>Thank you for being a hero.</p>
+                <strong>Every drop counts.</strong>
+            </div>
+            <div class="heartbeat-mark" aria-hidden="true">♥</div>
+        </section>
+
+        <section class="stats-grid" aria-label="Your donor statistics">
+            <article class="stat-card">
+                <span class="stat-icon" aria-hidden="true">✓</span>
+                <div class="stat-content">
+                    <p class="stat-label">Donation Eligibility</p>
+                    <h2 th:classappend="${eligibility == 'ELIGIBLE'} ? ' is-green'" th:text="${eligibility}">Not assessed</h2>
+                    <p class="stat-note" th:if="${score != null}" th:text="'Preliminary readiness score: ' + ${score} + '%'">Preliminary readiness score</p>
+                    <p class="stat-note" th:if="${score == null}">Complete an assessment to see your status.</p>
+                    <a th:href="@{/donor/eligibility}">View assessment <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon" aria-hidden="true">▣</span>
+                <div class="stat-content">
+                    <p class="stat-label">Upcoming Appointment</p>
+                    <h2 th:text="${appointment}">No appointment</h2>
+                    <p class="stat-note" th:if="${appointmentRecord != null}" th:text="${appointmentRecord.hospitalName}">Donation center</p>
+                    <p class="stat-note" th:if="${appointmentRecord == null}">Choose a donation center and request a time.</p>
+                    <a th:href="@{/donor/schedule}">Manage appointments <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon" aria-hidden="true">♥</span>
+                <div class="stat-content">
+                    <p class="stat-label">Blood Type</p>
+                    <h2 th:text="${bloodType}">Not set</h2>
+                    <p class="stat-note">Your donor profile</p>
+                    <a th:href="@{/donor/information}">Update information <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+            <article class="stat-card">
+                <span class="stat-icon" aria-hidden="true">🩸</span>
+                <div class="stat-content">
+                    <p class="stat-label">Total Donations</p>
+                    <h2 th:text="${totalDonations}">0</h2>
+                    <p class="stat-note" th:if="${nextEligibleDate != null}" th:text="'Next donation interval begins ' + ${nextEligibleDate}">Next donation date</p>
+                    <p class="stat-note" th:if="${nextEligibleDate == null}">Completed donations recorded for your account</p>
+                    <a th:href="@{/donor/history}">View history <span aria-hidden="true">→</span></a>
+                </div>
+            </article>
+        </section>
+
+        <section class="donor-panels">
+            <article class="panel quick-panel">
+                <header class="panel-heading"><h2>Quick Actions</h2></header>
+                <div class="quick-actions">
+                    <a class="quick-action" th:href="@{/donor/schedule}"><span class="action-icon" aria-hidden="true">▣</span><span>Schedule a Donation</span><b aria-hidden="true">›</b></a>
+                    <a class="quick-action" th:href="@{/donor/blood-requests}"><span class="action-icon" aria-hidden="true">🩸</span><span>View Blood Requests</span><b aria-hidden="true">›</b></a>
+                    <a class="quick-action" th:href="@{/donor/history}"><span class="action-icon" aria-hidden="true">▤</span><span>View Donation History</span><b aria-hidden="true">›</b></a>
+                </div>
+            </article>
+
+            <article class="panel appointment-panel">
+                <header class="panel-heading"><h2>Upcoming Appointment</h2><a th:href="@{/donor/appointments}">View all</a></header>
+                <div class="empty-state" th:if="${appointmentRecord == null}">
+                    <span class="empty-icon" aria-hidden="true">▣</span>
+                    <strong>No upcoming appointment</strong>
+                    <p>Schedule a donation at a participating center.</p>
+                    <a class="primary-button" th:href="@{/donor/schedule}">Schedule Donation</a>
+                </div>
+                <div class="table-wrap" th:if="${appointmentRecord != null}">
+                    <table><thead><tr><th>Date and time</th><th>Donation center</th><th>Status</th></tr></thead>
+                        <tbody><tr><td th:text="${appointmentRecord.appointmentAt}"></td><td th:text="${appointmentRecord.hospitalName}"></td>
+                            <td><span class="status-badge" th:classappend="${appointmentRecord.status == 'APPROVED'} ? ' success' : (${appointmentRecord.status == 'PENDING'} ? ' pending' : '')" th:text="${appointmentRecord.status}"></span></td></tr></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="panel history-panel">
+                <header class="panel-heading"><h2>Recent Donations</h2><a th:href="@{/donor/history}">Full history</a></header>
+                <div class="empty-state compact" th:if="${#lists.isEmpty(history)}"><span class="empty-icon" aria-hidden="true">▤</span><strong>No donation history yet</strong><p>Completed donation records will appear here.</p></div>
+                <div class="table-wrap" th:unless="${#lists.isEmpty(history)}">
+                    <table><thead><tr><th>Date</th><th>Type</th><th>Bags</th><th>Status</th></tr></thead>
+                        <tbody><tr th:each="d : ${history}"><td th:text="${d.donationDate}"></td><td th:text="${d.bloodType}"></td><td th:text="${d.bags}"></td>
+                            <td><span class="status-badge" th:classappend="${d.status == 'COMPLETED'} ? ' success' : (${d.status == 'PENDING'} ? ' pending' : '')" th:text="${d.status}"></span></td></tr></tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+
+        <section class="panel requests-panel">
+            <header class="panel-heading"><h2>Your Blood Requests</h2><a th:href="@{/donor/blood-requests}">Manage requests</a></header>
+            <div class="empty-state compact" th:if="${#lists.isEmpty(requests)}"><span class="empty-icon" aria-hidden="true">🩸</span><strong>No blood requests yet</strong><p>Requests submitted from your account will appear here.</p></div>
+            <div class="table-wrap" th:unless="${#lists.isEmpty(requests)}">
+                <table><thead><tr><th>Patient</th><th>Blood type</th><th>Bags</th><th>Urgency</th><th>Status</th></tr></thead>
+                    <tbody><tr th:each="r : ${requests}"><td th:text="${r.patientName}"></td><td th:text="${r.requestedBloodType}"></td><td th:text="${r.bagsNeeded}"></td><td th:text="${r.urgency}"></td>
+                        <td><span class="status-badge" th:classappend="${r.status == 'COMPLETED' or r.status == 'RECEIVED'} ? ' success' : (${r.status == 'PENDING'} ? ' pending' : '')" th:text="${r.status}"></span></td></tr></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+</body>
+</html>

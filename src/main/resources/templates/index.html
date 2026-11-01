@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink - Blood Donation</title>
+
+    <link rel="stylesheet" th:href="@{/css/style.css(v=4)}">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div th:replace="~{fragments/public-nav :: nav}"></div>
+
+<!-- HERO -->
+<section id="home" class="hero">
+
+    <div class="hero-text">
+        <span class="hero-badge">❤️ YOU HAVE THE POWER TO SAVE LIVES</span>
+
+        <h1>
+            Your Blood Can<br>
+            Give Someone<br>
+            <span>Another Tomorrow.</span>
+        </h1>
+
+        <p>
+            One donation can help patients in emergencies, surgeries,
+            accidents, and medical treatments. Become a blood donor and
+            help save lives in your community.
+        </p>
+
+        <div class="hero-buttons">
+            <a th:href="@{/register}" class="btn-primary">Become a donor</a>
+            <a th:href="@{/about}" class="btn-secondary">About LifeLink</a>
+        </div>
+    </div>
+
+    <div class="hero-image">
+        <img src="/images/world-donor-day.jpg"
+             alt="World Donor Day"
+             class="main-hero-img">
+    </div>
+
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-section">
+
+    <div class="about-image">
+        <img src="/images/save-life.jpg"
+             alt="Save a Life Poster">
+    </div>
+
+    <div class="about-text">
+        <h2>About LifeLink</h2>
+
+        <p>
+            LifeLink is a modern blood donation management platform that
+            connects donors, recipients, and healthcare institutions.
+            Our mission is to make blood donation accessible, organized,
+            and life-saving for every community.
+        </p>
+
+        <div class="about-card">
+
+            <img src="/images/heart-hands.jpg"
+                 alt="Heart Hands">
+
+            <div>
+                <h3>Every Drop Counts</h3>
+
+                <p>
+                    A single blood donation can save multiple lives and
+                    bring hope to patients in need.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="features-section">
+    <h2>How LifeLink Helps</h2>
+    <div class="features-grid">
+        <article class="feature-card"><span aria-hidden="true">♥</span><h3>Donor profiles</h3><p>Keep donor contact and blood type information organized.</p></article>
+        <article class="feature-card"><span aria-hidden="true">✓</span><h3>Health screening</h3><p>Record assessment responses for review by authorized staff.</p></article>
+        <article class="feature-card"><span aria-hidden="true">＋</span><h3>Donation tracking</h3><p>Manage appointments and donation history in one place.</p></article>
+    </div>
+    <a th:href="@{/register}" class="btn-primary">Create an account</a>
+</section>
+
+<!-- IMPACT -->
+<section id="impact" class="impact-section">
+
+    <h2>Our Impact</h2>
+
+    <div class="impact-grid">
+
+        <div class="impact-card">
+            <h3>25,634+</h3>
+            <p>Lives Impacted</p>
+        </div>
+
+        <div class="impact-card">
+            <h3>19,870+</h3>
+            <p>Registered Donors</p>
+        </div>
+
+        <div class="impact-card">
+            <h3>320+</h3>
+            <p>Donation Drives</p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer id="contact" class="footer">
+
+    <div class="footer-content">
+        <h3>LifeLink</h3>
+
+        <p>Give Blood. Give Life.</p>
+        <p>Email: support@lifelink.com</p>
+        <p>Phone: +63 912 345 6789</p>
+    </div>
+
+    <p class="footer-copy">
+        © 2026 LifeLink Blood Donation Management System
+    </p>
+
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+<header class="public-navbar" th:fragment="nav">
+    <a class="public-brand" th:href="@{/}" aria-label="LifeLink home"><span class="public-brand-heart">♥</span><span><strong>LifeLink</strong><small>Blood Donation Management System</small></span></a>
+    <nav class="public-nav-links" aria-label="Public navigation">
+        <a th:href="@{/}">Home</a><a th:href="@{/about}">About</a><a th:href="@{/features}">Features</a><a th:href="@{/contact}">Contact</a>
+    </nav>
+    <div class="public-nav-actions"><a th:href="@{/login}">Log in</a><a class="public-nav-cta" th:href="@{/register}">Create account</a></div>
+</header>

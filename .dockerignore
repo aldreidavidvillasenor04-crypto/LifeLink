@@ -1,0 +1,15 @@
+.git
+.codex-backups
+.vscode
+.idea
+target
+*.log
+.env*
+database-dumps
+exports
+*.sql
+!src/main/resources/db/migration/*.sql
+*.sql.gz
+*.dump
+*.dmp
+*.bak

@@ -1,0 +1,939 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            rgba(10, 15, 35, 0.55),
+            rgba(10, 15, 35, 0.55)
+        ),
+        url('/images/hospital-bg.jpg')
+        center center / cover no-repeat fixed;
+
+    color: #ffffff;
+}
+
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    width: 100%;
+    height: 90px;
+
+    background: #111b36;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 40px;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo-section {
+    display: flex;
+    align-items: center;
+
+    gap: 15px;
+}
+
+
+.logo-icon {
+    width: 54px;
+    height: 54px;
+
+    border-radius: 50%;
+
+    background: #c4001a;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+
+    color: #ffffff;
+}
+
+
+.logo-text h1 {
+    font-size: 30px;
+
+    font-weight: 800;
+
+    line-height: 1;
+
+    color: #ffffff;
+}
+
+
+.logo-text p {
+    font-size: 13px;
+
+    color: #cfd6e6;
+
+    margin-top: 5px;
+}
+
+
+
+/* =========================
+   NAVIGATION
+========================= */
+
+.nav-links {
+    display: flex;
+
+    gap: 40px;
+}
+
+
+.nav-links a {
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+
+.nav-links a:hover {
+    color: #ff4d6d;
+}
+
+
+
+/* =========================
+   DARK MODE
+========================= */
+
+.theme-toggle {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+
+.toggle-switch {
+    width: 54px;
+    height: 30px;
+
+    background: #d90429;
+
+    border-radius: 20px;
+
+    position: relative;
+}
+
+
+.toggle-switch::after {
+    content: '';
+
+    width: 24px;
+    height: 24px;
+
+    border-radius: 50%;
+
+    background: #ffffff;
+
+    position: absolute;
+
+    top: 3px;
+    right: 3px;
+}
+
+
+.toggle-label {
+    font-weight: 500;
+}
+
+
+
+/* =========================
+   LOGIN WRAPPER
+========================= */
+
+.login-wrapper {
+    min-height: 100vh;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    padding: 125px 20px 40px;
+}
+
+
+
+/* =========================
+   LOGIN CARD
+========================= */
+
+.login-card {
+    width: 100%;
+
+    max-width: 930px;
+
+    min-height: 710px;
+
+    display: flex;
+
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    background: #16213d;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.45);
+}
+
+
+
+/* =========================
+   WELCOME PANEL
+========================= */
+
+.welcome-panel {
+    flex: 1;
+
+    min-width: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #c90036,
+            #e00045
+        );
+
+    padding: 60px 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+
+
+/* TOP CIRCLE */
+
+.circle-top {
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    top: -110px;
+    right: -80px;
+}
+
+
+
+/* BOTTOM CIRCLE */
+
+.circle-bottom {
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.08);
+
+    bottom: -120px;
+    left: -90px;
+}
+
+
+
+/* WELCOME TITLE */
+
+.welcome-panel h2 {
+    font-size: 58px;
+
+    font-weight: 800;
+
+    margin-bottom: 20px;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.welcome-panel p {
+    font-size: 21px;
+
+    color: #ffe4ea;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.divider {
+    width: 100%;
+
+    max-width: 310px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 16px;
+
+    margin: 42px 0;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+
+.divider span {
+    flex: 1;
+
+    height: 2px;
+
+    background: rgba(255, 255, 255, 0.85);
+}
+
+
+.divider i {
+    font-style: normal;
+
+    font-size: 28px;
+
+    color: #ffffff;
+}
+
+
+
+/* =========================
+   BLOOD BAG
+========================= */
+
+.blood-bag {
+    width: 145px;
+
+    height: 205px;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+
+.bag {
+    width: 135px;
+
+    height: 190px;
+
+    border: 8px solid #ffffff;
+
+    border-radius: 25px;
+
+    position: relative;
+}
+
+
+.bag::before {
+    content: '';
+
+    position: absolute;
+
+    width: 52px;
+
+    height: 35px;
+
+    border: 8px solid #ffffff;
+
+    border-bottom: none;
+
+    border-radius: 20px 20px 0 0;
+
+    top: -43px;
+
+    left: 50%;
+
+    transform: translateX(-50%);
+}
+
+
+.bag-heart {
+    position: absolute;
+
+    width: 62px;
+
+    height: 62px;
+
+    background: #ffffff;
+
+    color: #d00036;
+
+    border-radius: 15px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 34px;
+
+    top: 50%;
+
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+
+
+/* =========================
+   OUTLINE HEART
+========================= */
+
+.heart-outline {
+    position: absolute;
+
+    right: 65px;
+
+    bottom: 55px;
+
+    font-size: 78px;
+
+    color: rgba(255, 255, 255, 0.65);
+
+    z-index: 2;
+}
+
+
+
+/* =========================
+   FORM PANEL
+========================= */
+
+.form-panel {
+    flex: 1;
+
+    min-width: 50%;
+
+    background: #16213d;
+
+    padding: 55px 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+
+
+/* LOGIN TITLE */
+
+.form-panel h2 {
+    text-align: center;
+
+    font-size: 58px;
+
+    font-weight: 800;
+
+    margin-bottom: 12px;
+}
+
+
+.subtitle {
+    text-align: center;
+
+    color: #d7dbea;
+
+    margin-bottom: 35px;
+
+    font-size: 18px;
+}
+
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+    background: #3a0d14;
+
+    border: 1px solid #7f1d1d;
+
+    color: #fecaca;
+
+    padding: 12px 16px;
+
+    border-radius: 10px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+
+
+/* =========================
+   LABELS
+========================= */
+
+.form-panel > form label {
+    display: block;
+
+    margin-bottom: 9px;
+
+    font-weight: 600;
+
+    color: #ffffff;
+}
+
+
+
+/* =========================
+   INPUT
+========================= */
+
+.input-group {
+    display: flex;
+
+    align-items: center;
+
+    background: #0d152c;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    border-radius: 12px;
+
+    padding: 0 14px;
+
+    height: 58px;
+
+    margin-bottom: 22px;
+}
+
+
+.input-group:focus-within {
+    border-color: #e00045;
+
+    box-shadow:
+        0 0 0 2px rgba(224, 0, 69, 0.15);
+}
+
+
+.icon {
+    color: #9aa5c3;
+
+    font-size: 18px;
+
+    width: 24px;
+
+    text-align: center;
+}
+
+
+.eye {
+    color: #9aa5c3;
+}
+
+.password-toggle {
+    flex: 0 0 auto;
+    border: 0;
+    padding: 8px 4px;
+    background: transparent;
+    color: #ff5475;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.password-toggle:focus-visible {
+    outline: 2px solid #ff5475;
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+
+.input-group input {
+    flex: 1;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    padding: 0 12px;
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.input-group input::placeholder {
+    color: #9aa5c3;
+}
+
+
+
+/* =========================
+   OPTIONS
+========================= */
+
+.form-options {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+
+    font-size: 14px;
+}
+
+
+.remember {
+    display: flex !important;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin: 0 !important;
+
+    color: #ffffff;
+}
+
+
+.remember input {
+    width: 15px;
+
+    height: 15px;
+}
+
+
+.form-options a {
+    color: #5aa0ff;
+
+    text-decoration: none;
+
+    font-weight: 500;
+}
+
+
+.form-options a:hover {
+    text-decoration: underline;
+}
+
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-btn {
+    width: 100%;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 11px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #e0002f,
+            #c9002b
+        );
+
+    color: #ffffff;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+    box-shadow:
+        0 10px 25px rgba(217, 4, 41, 0.35);
+}
+
+
+.login-btn:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 14px 32px rgba(217, 4, 41, 0.45);
+}
+
+
+
+/* =========================
+   OR DIVIDER
+========================= */
+
+.or-divider {
+    display: flex;
+
+    align-items: center;
+
+    margin: 28px 0;
+
+    color: #b7bfd8;
+}
+
+
+.or-divider::before,
+.or-divider::after {
+    content: '';
+
+    flex: 1;
+
+    height: 1px;
+
+    background: rgba(255, 255, 255, 0.14);
+}
+
+
+.or-divider div {
+    width: 40px;
+
+    height: 40px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.14);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background: #16213d;
+
+    margin: 0 12px;
+}
+
+
+
+/* =========================
+   REGISTER BUTTON
+========================= */
+
+.register-btn {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    width: 100%;
+
+    min-height: 54px;
+
+    border: 1px solid #b91c34;
+
+    border-radius: 11px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+
+.register-btn strong {
+    color: #ff5577;
+}
+
+
+.register-btn:hover {
+    background: rgba(185, 28, 52, 0.12);
+}
+
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 20px;
+
+        height: auto;
+
+        min-height: 90px;
+
+        flex-wrap: wrap;
+
+        gap: 14px;
+    }
+
+
+    .nav-links {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 18px;
+
+        flex-wrap: wrap;
+
+        padding-bottom: 12px;
+    }
+
+
+    .login-card {
+        flex-direction: column;
+
+        max-width: 560px;
+    }
+
+
+    .welcome-panel {
+        min-height: 400px;
+    }
+
+
+    .welcome-panel h2 {
+        font-size: 44px;
+    }
+
+
+    .form-panel {
+        padding: 40px 28px;
+    }
+
+
+    .form-panel h2 {
+        font-size: 46px;
+    }
+
+
+    .heart-outline {
+        right: 28px;
+
+        bottom: 24px;
+
+        font-size: 64px;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .theme-toggle {
+        display: none;
+    }
+
+
+    .logo-text h1 {
+        font-size: 24px;
+    }
+
+
+    .logo-text p {
+        font-size: 11px;
+    }
+
+
+    .nav-links {
+        font-size: 13px;
+    }
+
+
+    .login-wrapper {
+        padding-left: 10px;
+
+        padding-right: 10px;
+    }
+
+
+    .login-card {
+        border-radius: 18px;
+    }
+
+}

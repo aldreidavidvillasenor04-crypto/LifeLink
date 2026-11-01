@@ -1,0 +1,27 @@
+<aside class="sidebar" th:fragment="sidebar">
+    <div class="sidebar-brand"><span class="brand-mark">♥</span><span>LifeLink</span></div>
+    <div class="sidebar-user">
+        <div class="user-avatar" aria-hidden="true">●</div>
+        <div><strong th:text="${username}">User</strong><span th:text="${adminView} ? 'Administrator' : 'Welcome back!'">Welcome back!</span></div>
+    </div>
+
+    <p class="menu-caption" th:text="${adminView} ? 'ADMIN DASHBOARD' : 'DONOR MENU'">DONOR MENU</p>
+    <nav class="sidebar-nav" aria-label="Main navigation">
+        <a class="sidebar-link" th:classappend="${moduleTitle == 'Admin Dashboard' or moduleTitle == 'Donor Dashboard'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Admin Dashboard' or moduleTitle == 'Donor Dashboard'} ? 'page' : null" th:href="${adminView} ? @{/admin/dashboard} : @{/donor/dashboard}"><span aria-hidden="true">⌂</span><b th:text="${adminView} ? 'Admin Dashboard' : 'Dashboard'">Dashboard</b></a>
+        <a class="sidebar-link" th:classappend="${moduleTitle == 'Donor Information'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Donor Information'} ? 'page' : null" th:href="${adminView} ? @{/admin/donors} : @{/donor/information}"><span aria-hidden="true">☷</span><b>Donor Information</b></a>
+        <a class="sidebar-link" th:classappend="${#strings.contains(moduleTitle, 'Eligibility')} ? ' active'" th:attr="aria-current=${#strings.contains(moduleTitle, 'Eligibility')} ? 'page' : null" th:href="${adminView} ? @{/admin/assessment} : @{/donor/eligibility}"><span aria-hidden="true">♥</span><b th:text="${adminView} ? 'Donor Eligibility / Status' : 'Eligibility / Status'">Eligibility / Status</b></a>
+        <a class="sidebar-link" th:classappend="${moduleTitle == 'Schedule Donation'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Schedule Donation'} ? 'page' : null" th:href="${adminView} ? @{/admin/appointments} : @{/donor/schedule}"><span aria-hidden="true">▦</span><b>Schedule Donation</b></a>
+        <a class="sidebar-link" th:classappend="${moduleTitle == 'Donation History' or moduleTitle == 'Donation Management'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Donation History' or moduleTitle == 'Donation Management'} ? 'page' : null" th:href="${adminView} ? @{/admin/donations} : @{/donor/history}"><span aria-hidden="true">▤</span><b>Donation History</b></a>
+        <a class="sidebar-link" th:classappend="${moduleTitle == 'Appointment Management'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Appointment Management'} ? 'page' : null" th:href="${adminView} ? @{/admin/appointments} : @{/donor/appointments}"><span aria-hidden="true">◷</span><b>Upcoming Appointment</b></a>
+        <a class="sidebar-link" th:classappend="${moduleTitle == 'Blood Requests'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Blood Requests'} ? 'page' : null" th:href="${adminView} ? @{/admin/blood-requests} : @{/donor/blood-requests}"><span aria-hidden="true">♦</span><b>Blood Requests</b></a>
+        <a class="sidebar-link" th:if="${adminView}" th:classappend="${moduleTitle == 'Reports'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Reports'} ? 'page' : null" th:href="@{/admin/reports}"><span aria-hidden="true">▥</span><b>Reports</b></a>
+        <a class="sidebar-link" th:classappend="${moduleTitle == 'Profile'} ? ' active'" th:attr="aria-current=${moduleTitle == 'Profile'} ? 'page' : null" th:href="${adminView} ? @{/admin/profile} : @{/donor/profile}"><span aria-hidden="true">●</span><b>Profile</b></a>
+    </nav>
+
+    <div class="sidebar-footer">
+        <button class="theme-toggle" type="button" aria-pressed="false"><span>Dark mode</span><span class="toggle-track"><i></i></span></button>
+        <form class="sidebar-logout" method="post" th:action="@{/logout}">
+            <button class="logout-link" type="submit"><span>⇥</span> Log out</button>
+        </form>
+    </div>
+</aside>

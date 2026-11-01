@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LifeLink - Login</title>
+
+    <link rel="stylesheet" th:href="@{/css/login.css(v=4)}">
+    <script defer th:src="@{/js/password-visibility.js(v=1)}"></script>
+</head>
+
+<body>
+
+<header class="navbar">
+
+    <div class="logo-section">
+
+        <div class="logo-icon">
+            ♥
+        </div>
+
+        <div class="logo-text">
+            <h1>LifeLink</h1>
+            <p>Blood Donation Management System</p>
+        </div>
+
+    </div>
+
+
+    <nav class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/features">Features</a>
+        <a href="/contact">Contact</a>
+
+    </nav>
+
+
+    <div class="theme-toggle">
+
+        <div class="toggle-switch"></div>
+
+        <span class="toggle-label">
+            Dark Mode
+        </span>
+
+    </div>
+
+</header>
+
+
+<main class="login-wrapper">
+
+    <div class="login-card">
+
+
+        <!-- LEFT SIDE -->
+
+        <section class="welcome-panel">
+
+            <div class="welcome-circle circle-top"></div>
+            <div class="welcome-circle circle-bottom"></div>
+
+            <h2>Welcome!</h2>
+
+            <p>
+                Together, we can save more lives.
+            </p>
+
+
+            <div class="divider">
+
+                <span></span>
+
+                <i>♥</i>
+
+                <span></span>
+
+            </div>
+
+
+            <div class="blood-bag">
+
+                <div class="bag"></div>
+
+                <div class="bag-heart">
+                    ♥
+                </div>
+
+            </div>
+
+
+            <div class="heart-outline">
+                ♡
+            </div>
+
+        </section>
+
+
+
+        <!-- RIGHT SIDE -->
+
+        <section class="form-panel">
+
+            <h2>Login</h2>
+
+            <p class="subtitle">
+                Access your account to continue.
+            </p>
+
+            <div th:if="${registered}" class="success-message" role="status">
+                Registration successful. Your account is ready.
+                <a href="#login-form">Continue to log in</a>
+            </div>
+
+
+            <!-- ERROR MESSAGE -->
+
+            <div
+                th:if="${error}"
+                class="error-message"
+                th:text="${error}">
+            </div>
+
+
+            <form
+                th:action="@{/login}"
+                method="post" id="login-form">
+
+
+                <!-- USERNAME -->
+
+                <label for="username">
+                    Username or email
+                </label>
+
+                <div class="input-group">
+
+                    <span class="icon">
+                        ♟
+                    </span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your registered username or email"
+                        th:value="${submittedUsername}"
+                        autocomplete="username"
+                        required>
+
+                </div>
+
+
+
+                <!-- PASSWORD -->
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-group">
+
+                    <span class="icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required>
+
+                    <button class="eye password-toggle" type="button" data-password-toggle="password"
+                        aria-label="Show password" aria-pressed="false">Show</button>
+
+                </div>
+
+
+
+                <!-- OPTIONS -->
+
+                <div class="form-options">
+
+                    <label class="remember">
+
+                        <input
+                            type="checkbox"
+                            name="remember">
+
+                        <span>
+                            Remember me
+                        </span>
+
+                    </label>
+
+
+                    <span>Sign in with your username or email.</span>
+
+                </div>
+
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn">
+
+                    ➜ Login
+
+                </button>
+
+            </form>
+
+
+
+            <!-- OR -->
+
+            <div class="or-divider">
+
+                <span></span>
+
+                <div>or</div>
+
+                <span></span>
+
+            </div>
+
+
+
+            <!-- REGISTER -->
+
+            <a
+                href="/register"
+                class="register-btn">
+
+                <span>
+                    👤 +
+                </span>
+
+                <span>
+                    Don't have an account?
+                </span>
+
+                <strong>
+                    Register here
+                </strong>
+
+            </a>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+
+</html>

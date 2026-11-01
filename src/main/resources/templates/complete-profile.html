@@ -1,0 +1,14 @@
+<!doctype html><html lang="en" xmlns:th="http://www.thymeleaf.org"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Complete donor profile | LifeLink</title><link rel="stylesheet" th:href="@{/css/register.css(v=4)}"></head><body>
+<header class="navbar"><a class="logo-section" href="/"><span class="logo-heart">♥</span><span><b class="logo-text">LifeLink</b><small class="logo-subtitle">Blood Donation Management System</small></span></a><form class="logout-form" method="post" th:action="@{/logout}"><button type="submit" class="login-link">Log out</button></form></header>
+<main class="page-container"><section class="complete-profile-card"><p class="public-kicker">ONE LAST STEP</p><h1>Complete your donor profile</h1><p>Your account was created, but its donor details were not saved. Add the missing information below to finish signing in to LifeLink.</p>
+<div th:if="${param.error}" class="error-message" role="alert"><span th:if="${param.error[0] == 'email'}">That email address is already linked to another account.</span><span th:if="${param.error[0] == 'validation'}">Check each field and provide valid information.</span></div>
+<form method="post" th:action="@{/donor/complete-profile}" class="complete-profile-form">
+<label>Username<input th:value="${username}" disabled></label>
+<label>Email address<input name="email" type="email" autocomplete="email" maxlength="100" required th:value="${email}"></label>
+<label>Age<input name="age" type="number" min="1" max="120" required></label>
+<label>Contact number<input name="phone" type="tel" autocomplete="tel" pattern="[0-9+() .-]{7,30}" maxlength="30" required></label>
+<label>Blood type<select name="bloodType" required><option value="">Select blood type</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+<label>Gender<select name="gender" required><option value="">Select</option><option>Female</option><option>Male</option></select></label>
+<label class="complete-profile-wide">Address<textarea name="address" autocomplete="street-address" maxlength="255" rows="3" required></textarea></label>
+<button class="register-submit complete-profile-wide" type="submit">Save profile and continue</button>
+</form></section></main></body></html>

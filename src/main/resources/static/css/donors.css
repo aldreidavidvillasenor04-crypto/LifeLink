@@ -1,0 +1,159 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    display:flex;
+    background:#f4f4f4;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width:220px;
+    height:100vh;
+    background:#b30000;
+    color:white;
+    position:fixed;
+    left:0;
+    top:0;
+    display:flex;
+    flex-direction:column;
+}
+
+.sidebar h1{
+    text-align:center;
+    padding:25px 0;
+    border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+.sidebar a{
+    color:white;
+    text-decoration:none;
+    padding:18px 25px;
+    display:block;
+    transition:0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active{
+    background:#8b0000;
+}
+
+.logout{
+    margin-top:auto;
+}
+
+/* MAIN CONTENT */
+.main-content{
+    margin-left:220px;
+    width:calc(100% - 220px);
+    padding:20px;
+}
+
+/* TOPBAR */
+.topbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.topbar h1{
+    color:#b30000;
+    font-size:38px;
+}
+
+/* PAGE HEADER */
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+.page-header h2{
+    font-size:34px;
+    color:#222;
+}
+
+.add-btn{
+    background:#198754;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.add-btn:hover{
+    background:#157347;
+}
+
+/* TABLE */
+.table-container{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
+}
+
+.search-box{
+    margin-bottom:15px;
+}
+
+.search-box input{
+    width:300px;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+thead{
+    background:#f8d7da;
+}
+
+th, td{
+    border:1px solid #ddd;
+    padding:14px;
+    text-align:center;
+}
+
+th{
+    color:#222;
+}
+
+.edit-btn{
+    background:#0d6efd;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:4px;
+    cursor:pointer;
+    margin-right:5px;
+}
+
+.edit-btn:hover{
+    background:#0b5ed7;
+}
+
+.delete-btn{
+    background:#dc3545;
+    color:white;
+    border:none;
+    padding:8px 14px;
+    border-radius:4px;
+    cursor:pointer;
+}
+
+.delete-btn:hover{
+    background:#bb2d3b;
+}

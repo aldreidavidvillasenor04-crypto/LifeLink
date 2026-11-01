@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Reports | LifeLink</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css(v=2)}">
+    <link rel="stylesheet" th:href="@{/css/reports.css(v=3)}">
+    <script defer th:src="@{/js/dashboard.js(v=2)}"></script>
+    <script defer th:src="@{/js/reports.js(v=3)}"></script>
+</head>
+<body class="dashboard-page reports-page">
+<div class="app-shell">
+    <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+    <main class="dashboard-main">
+        <div th:replace="~{fragments/topbar :: topbar}"></div>
+        <header class="admin-heading report-heading">
+            <p class="eyebrow">ADMIN REPORTS</p>
+            <h1>Reports</h1>
+            <p>Review current donor, donation, eligibility, appointment, and inventory records.</p>
+        </header>
+
+        <nav class="report-nav" aria-label="Report sections">
+            <a href="#donor-report">Donors <span th:text="${#lists.size(donors)}">0</span></a>
+            <a href="#donation-report">Donations <span th:text="${#lists.size(donations)}">0</span></a>
+            <a href="#eligibility-report">Eligibility <span th:text="${#lists.size(assessments)}">0</span></a>
+            <a href="#appointment-report">Appointments <span th:text="${#lists.size(appointments)}">0</span></a>
+            <a href="#inventory-report">Inventory <span th:text="${#lists.size(inventory)}">0</span></a>
+        </nav>
+
+        <section id="donor-report" class="panel report-section" aria-labelledby="donor-title">
+            <div class="report-section-heading">
+                <div><p class="eyebrow">REGISTERED DONORS</p><h2 id="donor-title">Donor report</h2></div>
+                <span class="report-count" th:text="${#lists.size(donors)} + ' records'">0 records</span>
+            </div>
+            <div class="report-controls" data-report-filter="donors">
+                <label class="report-search">Search donors<input type="search" data-search placeholder="Name, ID, username, email, or phone"></label>
+                <label>Blood type<select data-blood-filter><option value="">All blood types</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+                <label>Account status<select data-status-filter><option value="">All statuses</option><option>Active</option><option>Archived</option></select></label>
+                <button class="filter-reset" type="button" data-reset>Clear filters</button>
+            </div>
+            <p class="filter-error" data-error role="alert" hidden></p>
+            <div class="table-wrap"><table class="report-table">
+                <thead><tr><th>Donor ID</th><th>Name</th><th>Username</th><th>Email</th><th>Phone</th><th>Blood type</th><th>Gender</th><th>Account status</th></tr></thead>
+                <tbody>
+                    <tr th:each="d : ${donors}" data-filter-row th:attr="data-blood=${d.bloodType},data-status=${d.archived ? 'Archived' : 'Active'},data-search=${d.id + ' ' + d.fullName + ' ' + (d.user == null ? '' : d.user.username) + ' ' + d.email + ' ' + d.contactNumber}">
+                        <td th:text="${d.id}"></td><td th:text="${d.fullName}"></td><td th:text="${d.user == null ? '—' : d.user.username}"></td><td th:text="${d.email}"></td><td th:text="${d.contactNumber}"></td><td th:text="${d.bloodType}"></td><td th:text="${d.gender}"></td><td><span class="report-status" th:text="${d.archived ? 'Archived' : 'Active'}"></span></td>
+                    </tr>
+                    <tr class="report-empty-row" data-static-empty th:if="${#lists.isEmpty(donors)}"><td colspan="8">No donor records are available.</td></tr>
+                    <tr class="report-empty-row" data-no-match hidden><td colspan="8">No donors match these filters.</td></tr>
+                </tbody>
+            </table></div>
+        </section>
+
+        <section id="donation-report" class="panel report-section" aria-labelledby="donation-title">
+            <div class="report-section-heading">
+                <div><p class="eyebrow">DONATION ACTIVITY</p><h2 id="donation-title">Donation report</h2></div>
+                <span class="report-count" th:text="${#lists.size(donations)} + ' records'">0 records</span>
+            </div>
+            <div class="report-controls" data-report-filter="donations">
+                <label class="report-search">Search donations<input type="search" data-search placeholder="Donor, donation ID, or blood type"></label>
+                <label>Blood type<select data-blood-filter><option value="">All blood types</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+                <label>Status<select data-status-filter><option value="">All statuses</option><option>PENDING</option><option>COMPLETED</option><option>CANCELLED</option></select></label>
+                <label>From<input type="date" data-date-from></label><label>To<input type="date" data-date-to></label>
+                <button class="filter-reset" type="button" data-reset>Clear filters</button>
+            </div>
+            <p class="filter-error" data-error role="alert" hidden></p>
+            <div class="table-wrap"><table class="report-table">
+                <thead><tr><th>Donation ID</th><th>Date</th><th>Donor</th><th>Blood type</th><th>Bags</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr th:each="d : ${donations}" data-filter-row th:attr="data-blood=${d.bloodType},data-status=${d.status},data-date=${d.donationDate},data-search=${d.id + ' ' + d.donor.fullName + ' ' + d.bloodType + ' ' + d.status}">
+                        <td th:text="${d.id}"></td><td th:text="${d.donationDate == null ? '—' : d.donationDate}"></td><td th:text="${d.donor.fullName}"></td><td th:text="${d.bloodType}"></td><td th:text="${d.bags}"></td><td><span class="report-status" th:text="${d.status}"></span></td>
+                    </tr>
+                    <tr class="report-empty-row" data-static-empty th:if="${#lists.isEmpty(donations)}"><td colspan="6">No donation records are available.</td></tr>
+                    <tr class="report-empty-row" data-no-match hidden><td colspan="6">No donations match these filters.</td></tr>
+                </tbody>
+            </table></div>
+        </section>
+
+        <section id="eligibility-report" class="panel report-section" aria-labelledby="eligibility-title">
+            <div class="report-section-heading">
+                <div><p class="eyebrow">HEALTH ASSESSMENTS</p><h2 id="eligibility-title">Eligibility report</h2></div>
+                <span class="report-count" th:text="${#lists.size(assessments)} + ' records'">0 records</span>
+            </div>
+            <div class="report-controls" data-report-filter="eligibility">
+                <label class="report-search">Search assessments<input type="search" data-search placeholder="Donor, assessment ID, or reason"></label>
+                <label>Blood type<select data-blood-filter><option value="">All blood types</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+                <label>Eligibility<select data-status-filter><option value="">All results</option><option>ELIGIBLE</option><option>NOT ELIGIBLE</option><option>IN PROCESS</option></select></label>
+                <label>From<input type="date" data-date-from></label><label>To<input type="date" data-date-to></label>
+                <button class="filter-reset" type="button" data-reset>Clear filters</button>
+            </div>
+            <p class="filter-error" data-error role="alert" hidden></p>
+            <div class="table-wrap"><table class="report-table">
+                <thead><tr><th>Assessment ID</th><th>Submitted</th><th>Donor</th><th>Blood type</th><th>Readiness</th><th>Result</th><th>Next eligible</th><th>Reasons</th></tr></thead>
+                <tbody>
+                    <tr th:each="a : ${assessments}" data-filter-row th:attr="data-date=${a.submittedAt == null ? '' : #temporals.format(a.submittedAt,'yyyy-MM-dd')},data-blood=${a.donor.bloodType},data-status=${a.resultStatus},data-search=${a.id + ' ' + a.donor.fullName + ' ' + a.resultReasons}">
+                        <td th:text="${a.id}"></td><td th:text="${a.submittedAt == null ? '—' : #temporals.format(a.submittedAt,'yyyy-MM-dd HH:mm')}"></td><td th:text="${a.donor.fullName}"></td><td th:text="${a.donor.bloodType}"></td><td th:text="${a.readinessScore} + '%' "></td><td><span class="report-status" th:text="${a.resultStatus}"></span></td><td th:text="${a.nextEligibleDate == null ? '—' : a.nextEligibleDate}"></td><td class="reason-cell" th:text="${a.resultReasons == null or #strings.isEmpty(a.resultReasons) ? 'No reason recorded' : a.resultReasons}"></td>
+                    </tr>
+                    <tr class="report-empty-row" data-static-empty th:if="${#lists.isEmpty(assessments)}"><td colspan="8">No eligibility assessments are available.</td></tr>
+                    <tr class="report-empty-row" data-no-match hidden><td colspan="8">No assessments match these filters.</td></tr>
+                </tbody>
+            </table></div>
+        </section>
+
+        <section id="appointment-report" class="panel report-section" aria-labelledby="appointment-title">
+            <div class="report-section-heading">
+                <div><p class="eyebrow">DONATION SCHEDULING</p><h2 id="appointment-title">Appointment report</h2></div>
+                <span class="report-count" th:text="${#lists.size(appointments)} + ' records'">0 records</span>
+            </div>
+            <div class="report-controls" data-report-filter="appointments">
+                <label class="report-search">Search appointments<input type="search" data-search placeholder="Donor, center, city, or appointment ID"></label>
+                <label>Blood type<select data-blood-filter><option value="">All blood types</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select></label>
+                <label>Status<select data-status-filter><option value="">All statuses</option><option>PENDING</option><option>APPROVED</option><option>DENIED</option><option>CANCELLED</option></select></label>
+                <label>From<input type="date" data-date-from></label><label>To<input type="date" data-date-to></label>
+                <button class="filter-reset" type="button" data-reset>Clear filters</button>
+            </div>
+            <p class="filter-error" data-error role="alert" hidden></p>
+            <div class="table-wrap"><table class="report-table">
+                <thead><tr><th>Appointment ID</th><th>Date and time</th><th>Donor</th><th>Blood type</th><th>Center</th><th>City</th><th>Status</th></tr></thead>
+                <tbody>
+                    <tr th:each="a : ${appointments}" data-filter-row th:attr="data-date=${a.appointmentAt == null ? '' : #temporals.format(a.appointmentAt,'yyyy-MM-dd')},data-blood=${a.donor.bloodType},data-status=${a.status},data-search=${a.id + ' ' + a.donor.fullName + ' ' + a.hospitalName + ' ' + a.city}">
+                        <td th:text="${a.id}"></td><td th:text="${a.appointmentAt == null ? '—' : #temporals.format(a.appointmentAt,'yyyy-MM-dd HH:mm')}"></td><td th:text="${a.donor.fullName}"></td><td th:text="${a.donor.bloodType}"></td><td th:text="${a.hospitalName}"></td><td th:text="${a.city}"></td><td><span class="report-status" th:text="${a.status == null ? 'UNKNOWN' : a.status}"></span></td>
+                    </tr>
+                    <tr class="report-empty-row" data-static-empty th:if="${#lists.isEmpty(appointments)}"><td colspan="7">No appointment records are available.</td></tr>
+                    <tr class="report-empty-row" data-no-match hidden><td colspan="7">No appointments match these filters.</td></tr>
+                </tbody>
+            </table></div>
+        </section>
+
+        <section id="inventory-report" class="panel report-section" aria-labelledby="inventory-title">
+            <div class="report-section-heading">
+                <div><p class="eyebrow">AVAILABLE STOCK</p><h2 id="inventory-title">Blood inventory</h2></div>
+                <span class="report-count" th:text="${#lists.size(inventory)} + ' blood types'">0 blood types</span>
+            </div>
+            <div class="table-wrap"><table class="report-table">
+                <thead><tr><th>Blood type</th><th>Available bags</th><th>Stock status</th></tr></thead>
+                <tbody>
+                    <tr th:each="i : ${inventory}" data-filter-row th:attr="data-blood=${i.bloodType},data-search=${i.bloodType}"><td th:text="${i.bloodType}"></td><td th:text="${i.bags}"></td><td><span class="report-status" th:classappend="${i.bags <= 10} ? ' needs-restock'" th:text="${i.bags <= 10 ? 'Restock required' : 'Stock available'}"></span></td></tr>
+                    <tr class="report-empty-row" data-static-empty th:if="${#lists.isEmpty(inventory)}"><td colspan="3">No inventory records are available.</td></tr>
+                </tbody>
+            </table></div>
+        </section>
+        <footer class="report-footnote">Reports show database records available to administrators. Registration timestamps are not stored in the current donor schema.</footer>
+    </main>
+</div>
+</body>
+</html>

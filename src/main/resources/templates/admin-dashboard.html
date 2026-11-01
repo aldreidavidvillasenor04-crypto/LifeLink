@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Dashboard | LifeLink</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css(v=2)}">
+    <script th:src="@{/js/dashboard.js(v=2)}" defer></script>
+</head>
+<body class="dashboard-page">
+<div class="app-shell">
+    <button class="mobile-menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+    <div th:replace="~{fragments/sidebar :: sidebar}"></div>
+
+    <main class="dashboard-main admin-main">
+        <div th:replace="~{fragments/topbar :: topbar}"></div>
+        <header class="admin-heading">
+            <p class="eyebrow">LIFELINK ADMIN DASHBOARD</p>
+            <h1>Welcome, <span th:text="${username}">Admin</span>! <span aria-hidden="true">👋</span></h1>
+            <p>Here’s what’s happening with LifeLink today.</p>
+        </header>
+
+        <section class="stats-grid" aria-label="System statistics">
+            <article class="stat-card"><span class="stat-icon">♟</span><div class="stat-content"><p class="stat-label">Total Donors</p><h2 th:text="${totalDonors}">0</h2><p class="stat-note">Registered donor records</p><a th:href="@{/admin/donors}">View donors <span>→</span></a></div></article>
+            <article class="stat-card"><span class="stat-icon">🩸</span><div class="stat-content"><p class="stat-label">Total Donations</p><h2 th:text="${totalDonations}">Not recorded</h2><p class="stat-note">Completed donation records</p><a th:href="@{/admin/donations}">View donations <span>→</span></a></div></article>
+            <article class="stat-card"><span class="stat-icon">▦</span><div class="stat-content"><p class="stat-label">Appointments</p><h2 th:text="${appointments}">Not recorded</h2><p class="stat-note">Upcoming appointments</p><a th:href="@{/admin/appointments}">View appointments <span>→</span></a></div></article>
+            <article class="stat-card"><span class="stat-icon">♥</span><div class="stat-content"><p class="stat-label">Blood Requests</p><h2 th:text="${bloodRequests}">Not recorded</h2><p class="stat-note">Active requests</p><a th:href="@{/admin/blood-requests}">View requests <span>→</span></a></div></article>
+        </section>
+
+        <section class="admin-panels">
+            <article class="panel inventory-panel">
+                <header class="panel-heading"><h2><span class="heading-icon">🩸</span> Blood Inventory</h2><a th:href="@{/admin/reports}">View report</a></header>
+                <form method="post" th:action="@{/admin/inventory}" class="inline-form"><select name="bloodType" required><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option></select><input name="bags" type="number" min="0" placeholder="Current bags" required><button>Set stock</button></form>
+                <div class="inventory-list"><div class="inventory-row" th:each="i : ${inventory}"><strong th:text="${i.bloodType}"></strong><div class="inventory-track"><i th:style="'width:' + ${T(java.lang.Math).min(100, i.bags * 5)} + '%'"></i></div><span th:text="${i.bags} + ' bags'"></span><b th:if="${i.bags <= 10}" class="stock-alert">Restock</b></div><p th:if="${#lists.isEmpty(inventory)}">No stock has been recorded yet.</p></div>
+            </article>
+            <article class="panel request-table-panel">
+                <header class="panel-heading"><h2>Recent Blood Requests</h2><a th:href="@{/admin/blood-requests}">View all</a></header>
+                <div class="table-wrap"><table><thead><tr><th>Patient</th><th>Type</th><th>Bags</th><th>Urgency</th><th>Status</th></tr></thead><tbody><tr th:each="r : ${recentRequests}"><td th:text="${r.patientName}"></td><td th:text="${r.requestedBloodType}"></td><td th:text="${r.bagsNeeded}"></td><td><span class="status-badge" th:classappend="${r.urgency == 'URGENT'} ? ' alert'" th:text="${r.urgency}"></span></td><td><span class="status-badge" th:classappend="${r.status == 'COMPLETED' or r.status == 'RECEIVED'} ? ' success' : (${r.status == 'PENDING'} ? ' pending' : '')" th:text="${r.status}"></span></td></tr><tr th:if="${#lists.isEmpty(recentRequests)}"><td colspan="5" class="table-empty">No blood requests have been recorded.</td></tr></tbody></table></div>
+            </article>
+            <article class="panel admin-appointments-panel">
+                <header class="panel-heading"><h2><span class="heading-icon">▦</span> Upcoming Appointments</h2><a th:href="@{/admin/appointments}">View all</a></header>
+                <div class="table-wrap"><table><thead><tr><th>Donor</th><th>When</th><th>Center</th><th>Status</th></tr></thead><tbody><tr th:each="a : ${upcomingAppointments}"><td th:text="${a.donor.fullName}"></td><td th:text="${a.appointmentAt}"></td><td th:text="${a.hospitalName}"></td><td><span class="status-badge" th:classappend="${a.status == 'APPROVED'} ? ' success' : (${a.status == 'PENDING'} ? ' pending' : '')" th:text="${a.status}"></span></td></tr><tr th:if="${#lists.isEmpty(upcomingAppointments)}"><td colspan="4">No upcoming appointments.</td></tr></tbody></table></div>
+            </article>
+            <article class="panel donations-chart-panel">
+                <header class="panel-heading"><h2><span class="heading-icon">▥</span> Donations</h2></header>
+                <p class="chart-caption">This month</p>
+                <div class="empty-state compact chart-empty" th:if="${#lists.isEmpty(monthlyDonations)}"><span class="empty-icon">▥</span><strong>No completed donations this month</strong></div>
+                <div class="table-wrap" th:unless="${#lists.isEmpty(monthlyDonations)}"><table><thead><tr><th>Date</th><th>Donor</th><th>Bags</th></tr></thead><tbody><tr th:each="d : ${monthlyDonations}"><td th:text="${d.donationDate}"></td><td th:text="${d.donor.fullName}"></td><td th:text="${d.bags}"></td></tr></tbody></table></div>
+            </article>
+        </section>
+    </main>
+</div>
+</body>
+</html>

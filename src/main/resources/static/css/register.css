@@ -1,0 +1,735 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background:
+        linear-gradient(
+            rgba(20, 30, 55, 0.45),
+            rgba(20, 30, 55, 0.45)
+        ),
+        url('/images/hospital-bg.jpg');
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+}
+
+
+/* =========================
+   NAVBAR
+   ========================= */
+
+.navbar {
+    height: 90px;
+
+    background: #111c3a;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 35px;
+
+    position: relative;
+    z-index: 10;
+}
+
+
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+
+.logo-heart {
+    width: 48px;
+    height: 48px;
+
+    background: #e6002d;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: white;
+
+    font-size: 28px;
+}
+
+
+.logo-text {
+    font-size: 29px;
+    font-weight: 800;
+    color: white;
+}
+
+
+.logo-subtitle {
+    font-size: 12px;
+    color: #d0d5e2;
+    margin-top: 2px;
+}
+
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 38px;
+}
+
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.nav-links a:hover {
+    color: #ff1744;
+}
+
+
+.dark-mode {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 15px;
+    font-weight: 700;
+}
+
+
+.toggle {
+    width: 46px;
+    height: 25px;
+
+    background: #e6002d;
+
+    border-radius: 30px;
+
+    position: relative;
+}
+
+
+.toggle-circle {
+    width: 20px;
+    height: 20px;
+
+    background: white;
+
+    border-radius: 50%;
+
+    position: absolute;
+
+    right: 3px;
+    top: 2.5px;
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.page-container {
+    min-height: calc(100vh - 90px);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 25px 30px 50px;
+}
+
+
+.auth-card {
+    width: 930px;
+
+    min-height: 650px;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    border-radius: 24px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+
+    background: #111c3a;
+}
+
+
+/* =========================
+   LEFT PANEL
+   ========================= */
+
+.welcome-panel {
+    background: #d40038;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    padding-top: 105px;
+
+    overflow: hidden;
+}
+
+
+.welcome-panel h1 {
+    font-size: 50px;
+
+    font-weight: 800;
+
+    z-index: 2;
+
+    margin-bottom: 28px;
+}
+
+
+.welcome-panel p {
+    font-size: 20px;
+
+    z-index: 2;
+
+    margin-bottom: 52px;
+}
+
+
+.circle {
+    position: absolute;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+.circle-one {
+    width: 280px;
+    height: 280px;
+
+    top: -80px;
+    right: -60px;
+}
+
+
+.circle-two {
+    width: 190px;
+    height: 190px;
+
+    bottom: -90px;
+    left: -80px;
+}
+
+
+/* =========================
+   HEART DIVIDER
+   ========================= */
+
+.heart-divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    width: 310px;
+
+    margin-bottom: 28px;
+
+    z-index: 2;
+}
+
+
+.heart-divider span {
+    height: 2px;
+
+    flex: 1;
+
+    background: white;
+}
+
+
+.heart-divider b {
+    font-size: 22px;
+}
+
+
+/* =========================
+   BLOOD BAG
+   ========================= */
+
+.blood-bag {
+    position: relative;
+
+    width: 150px;
+    height: 230px;
+
+    z-index: 2;
+}
+
+
+.bag-handle {
+    position: absolute;
+
+    width: 65px;
+    height: 35px;
+
+    border: 7px solid white;
+
+    border-bottom: none;
+
+    border-radius: 30px 30px 0 0;
+
+    top: 0;
+    left: 42px;
+}
+
+
+.bag-body {
+    position: absolute;
+
+    width: 140px;
+    height: 185px;
+
+    border: 7px solid white;
+
+    border-radius: 25px;
+
+    top: 25px;
+    left: 5px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.bag-heart {
+    width: 60px;
+    height: 60px;
+
+    border-radius: 15px;
+
+    background: white;
+
+    color: #d40038;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+}
+
+
+.outline-heart {
+    position: absolute;
+
+    right: 55px;
+
+    bottom: 28px;
+
+    font-size: 60px;
+
+    color: rgba(255,255,255,0.75);
+}
+
+
+/* =========================
+   RIGHT PANEL
+   ========================= */
+
+.register-panel {
+    background: #172344;
+
+    padding: 52px 45px 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    overflow-y: auto;
+}
+
+
+.register-panel h2 {
+    text-align: center;
+
+    font-size: 46px;
+
+    font-weight: 800;
+
+    margin-bottom: 18px;
+}
+
+
+.subtitle {
+    text-align: center;
+
+    color: #e1e5ef;
+
+    font-size: 17px;
+
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   FORM
+   ========================= */
+
+.register-panel form {
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.register-panel label {
+    font-size: 14px;
+
+    font-weight: 700;
+
+    margin-bottom: 8px;
+
+    color: white;
+}
+
+
+.input-container {
+    height: 52px;
+
+    border: 1px solid #34415e;
+
+    border-radius: 10px;
+
+    background: #101b37;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 13px;
+
+    margin-bottom: 17px;
+}
+
+
+.input-icon {
+    width: 30px;
+
+    color: white;
+
+    font-size: 17px;
+
+    text-align: center;
+}
+
+
+.input-container input {
+    flex: 1;
+
+    height: 100%;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 14px;
+
+    padding: 0 10px;
+}
+
+
+.input-container input::placeholder {
+    color: #9aa4ba;
+}
+
+
+/* =========================
+   BUTTON
+   ========================= */
+
+.register-submit {
+    height: 56px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #e6002d;
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    margin-top: 5px;
+
+    box-shadow:
+        0 8px 20px rgba(230, 0, 45, 0.35);
+
+    transition: 0.2s;
+}
+
+
+.register-submit:hover {
+    background: #ff1744;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   MESSAGES
+   ========================= */
+
+.error-message {
+    background: rgba(160, 0, 20, 0.35);
+
+    border: 1px solid #ff334f;
+
+    color: #ffb3bd;
+
+    border-radius: 8px;
+
+    padding: 11px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    margin-bottom: 18px;
+}
+
+
+.success-message {
+    background: rgba(0, 170, 100, 0.20);
+
+    border: 1px solid #22cc88;
+
+    color: #8ff0c5;
+
+    border-radius: 8px;
+
+    padding: 11px;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    margin-bottom: 18px;
+}
+
+
+/* =========================
+   DIVIDER
+   ========================= */
+
+.or-divider {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 24px 0 18px;
+
+    color: #c8cedb;
+}
+
+
+.or-divider span {
+    flex: 1;
+
+    height: 1px;
+
+    background: #35415d;
+}
+
+
+.or-divider div {
+    width: 35px;
+    height: 35px;
+
+    border: 1px solid #35415d;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+/* =========================
+   LOGIN LINK
+   ========================= */
+
+.login-link {
+    height: 48px;
+
+    border: 1px solid #e6002d;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-decoration: none;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+
+.login-link strong {
+    color: #ff1744;
+
+    margin-left: 5px;
+}
+
+
+.login-link:hover {
+    background: rgba(230, 0, 45, 0.12);
+}
+
+.logout-form {
+    margin-left: auto;
+}
+
+.logout-form .login-link {
+    padding: 0 16px;
+    background: transparent;
+    font: inherit;
+    cursor: pointer;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .auth-card {
+        width: 100%;
+        max-width: 650px;
+
+        grid-template-columns: 1fr;
+    }
+
+    .welcome-panel {
+        min-height: 420px;
+
+        padding-top: 60px;
+    }
+
+    .register-panel {
+        min-height: 650px;
+    }
+}
+
+
+@media (max-width: 500px) {
+
+    .page-container {
+        padding: 15px;
+    }
+
+    .register-panel {
+        padding: 35px 25px;
+    }
+
+    .register-panel h2 {
+        font-size: 36px;
+    }
+
+    .welcome-panel h1 {
+        font-size: 40px;
+    }
+}
+
+.register-panel h2{font-size:clamp(32px,3vw,40px);line-height:1.12}
+.register-panel form{gap:7px}
+.register-panel .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;width:100%;margin-bottom:8px}
+.register-panel .form-grid label{display:flex;flex-direction:column;gap:6px;min-width:0;margin:0}
+.register-panel .password-toggle{align-self:flex-start;border:0;padding:2px 0;background:transparent;color:#ff8099;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.register-panel .password-toggle:focus-visible{outline:2px solid #ff5475;outline-offset:2px;border-radius:3px}
+.register-panel input:not([type=checkbox]),.register-panel select,.register-panel textarea{width:100%;min-width:0;min-height:48px;padding:0 13px;border:1px solid #34415e;border-radius:9px;background:#101b37;color:#fff;font:inherit;font-size:14px;outline:none}
+.register-panel textarea{padding:12px;resize:vertical}
+.register-panel input::placeholder{color:#9aa4ba}
+.register-panel .input-container input{height:100%;min-height:0;padding:0 10px;border:0;background:transparent;box-shadow:none}
+.register-panel .input-container:focus-within{border-color:#ff5475;box-shadow:0 0 0 3px rgba(230,0,45,.18)}
+.register-panel input:focus,.register-panel select:focus{border-color:#ff5475;box-shadow:0 0 0 3px rgba(230,0,45,.18)}
+.register-panel select option{background:#172344;color:#fff}
+.register-panel #donorFields{display:flex;flex-direction:column;gap:7px}
+.register-panel #adminCodeWrap{margin:4px 0 9px}
+.register-panel #adminCodeWrap small{display:block;margin-top:5px;color:#d0d5e2;font-size:12px}
+.register-panel #adminCodeWrap[hidden],.register-panel #donorFields[hidden]{display:none}
+.register-panel .login-link{flex:0 0 auto;margin-top:15px;text-decoration:none}
+.register-panel .error-message{margin:0 0 10px}
+@media(max-width:500px){.register-panel .form-grid{grid-template-columns:1fr}.register-panel{padding:30px 22px}.register-panel h2{font-size:34px}}
+.complete-profile-card{width:min(820px,100%);padding:clamp(24px,5vw,48px);border-radius:22px;background:#172344;color:#fff;box-shadow:0 20px 50px rgba(0,0,0,.3)}
+.complete-profile-card h1{margin:0 0 10px;font-size:clamp(30px,4vw,42px)}
+.complete-profile-card>p:not(.public-kicker){max-width:650px;margin-bottom:22px;color:#d0d5e2}
+.complete-profile-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.complete-profile-form label{display:flex;flex-direction:column;gap:6px;min-width:0;font-size:13px;font-weight:700}
+.complete-profile-form input,.complete-profile-form select,.complete-profile-form textarea{width:100%;min-height:46px;padding:10px 12px;border:1px solid #34415e;border-radius:9px;background:#101b37;color:#fff;font:inherit}
+.complete-profile-form input:disabled{color:#aab2c6;background:#1c2948}
+.complete-profile-form textarea{resize:vertical}
+.complete-profile-wide{grid-column:1/-1}
+.complete-profile-form .register-submit{width:100%;margin-top:4px}
+@media(max-width:600px){.complete-profile-form{grid-template-columns:1fr}.complete-profile-wide{grid-column:auto}.complete-profile-card{padding:24px 19px}}
