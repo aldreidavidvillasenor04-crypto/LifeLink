@@ -1,29 +1,39 @@
+
 document.addEventListener('DOMContentLoaded', () => {
-  const accountType = document.querySelector('#accountType');
-  const wrapper = document.querySelector('#adminCodeWrap');
-  const code = document.querySelector('#adminCode');
-  const donorFields = document.querySelector('#donorFields');
-  const form = document.querySelector('#registerForm');
-  const refresh = () => {
-    const adminRequested = accountType.value === 'ADMIN';
-    wrapper.hidden = !adminRequested;
-    code.required = adminRequested;
-    donorFields.hidden = adminRequested;
-    donorFields.querySelectorAll('input, select').forEach(field => {
-      field.disabled = adminRequested;
-      field.required = !adminRequested;
+
+    const form = document.querySelector('#registerForm');
+
+    if (!form) return;
+
+    const username = form.elements.username;
+    const password = form.elements.password;
+    const confirmPassword = form.elements.confirmPassword;
+
+    // Normalize spaces in the username
+    username.addEventListener('blur', () => {
+        username.value = username.value.trim().replace(/\s+/g, ' ');
     });
-  };
-  accountType.addEventListener('change', refresh);
-  refresh();
-  form.addEventListener('submit', event => {
-    const password = form.elements.password.value;
-    const confirm = form.elements.confirmPassword.value;
-    if (password !== confirm) {
-      event.preventDefault();
-      form.elements.confirmPassword.setCustomValidity('Passwords do not match.');
-      form.elements.confirmPassword.reportValidity();
-    }
-  });
-  form.elements.confirmPassword.addEventListener('input', event => event.target.setCustomValidity(''));
+
+    // Check password confirmation
+    form.addEventListener('submit', event => {
+
+        if (password.value !== confirmPassword.value) {
+
+            event.preventDefault();
+
+            confirmPassword.setCustomValidity(
+                'Passwords do not match.'
+            );
+
+            confirmPassword.reportValidity();
+
+        }
+
+    });
+
+    // Clear password error while typing
+    confirmPassword.addEventListener('input', () => {
+        confirmPassword.setCustomValidity('');
+    });
+
 });
